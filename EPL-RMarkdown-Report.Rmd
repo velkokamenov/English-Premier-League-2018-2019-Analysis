@@ -1,7 +1,7 @@
 ---
 title: "English Premier League Season 2018/2019 Analysis"
 author: "Created by: Velko Kamenov"
-date: "January 15, 2019, 22 Rounds Played"
+date: "January 21, 2019, 23 Rounds Played"
 output:
   html_document: default
 ---
