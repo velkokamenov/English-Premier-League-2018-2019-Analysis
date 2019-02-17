@@ -1,7 +1,7 @@
 ---
 title: "English Premier League Season 2018/2019 Analysis"
 author: "Created by: Velko Kamenov"
-date: "January 21, 2019, 23 Rounds Played"
+date: "February 12, 2019, 26 Rounds Played"
 output:
   html_document: default
 ---
@@ -47,7 +47,7 @@ teamIDs = fread("./Data/Team_IDs.csv", na.strings=c("NULL",""))
 ```{r Premier League Table}
 # Home table
 EPL_Home_Table = matchData %>%
-  filter(FTR == "H") %>%
+  dplyr::filter(FTR == "H") %>%
   group_by(HomeTeam) %>%
   summarise(Wins = n()) %>%
   ungroup() %>%
@@ -106,7 +106,7 @@ EPL_Full_Table = EPL_Home_Table %>%
          GD = GoalsScored - GoalsConceded,
          Points = 3*Wins + 1*Draws) %>%
   ungroup() %>%
-  arrange(desc(Points)) %>%
+  arrange(desc(Points), desc(GD), desc(GoalsScored)) %>%
   select(Team, Played, Wins, Draws, Losses, GoalsScored, GoalsConceded, GD, Points) %>%
   mutate(Position = seq.int(20)) %>%
   select(Position, everything())
@@ -119,7 +119,7 @@ EPL_Home_Table_Formatted = EPL_Home_Table %>%
          GD = GoalsScored - GoalsConceded,
          Points = 3*Wins + 1*Draws) %>%
   ungroup() %>%
-  arrange(desc(Points)) %>%
+  arrange(desc(Points), desc(GD), desc(GoalsScored)) %>%
   select(Team, Played, Wins, Draws, Losses, GoalsScored, GoalsConceded, GD, Points) %>%
   mutate(Position = seq.int(20)) %>%
   select(Position, everything())
@@ -132,7 +132,7 @@ EPL_Away_Table_Formatted = EPL_Away_Table %>%
          GD = GoalsScored - GoalsConceded,
          Points = 3*Wins + 1*Draws) %>%
   ungroup() %>%
-  arrange(desc(Points)) %>%
+  arrange(desc(Points), desc(GD), desc(GoalsScored)) %>%
   select(Team, Played, Wins, Draws, Losses, GoalsScored, GoalsConceded, GD, Points) %>%
   mutate(Position = seq.int(20)) %>%
   select(Position, everything())
